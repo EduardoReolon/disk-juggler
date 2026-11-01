@@ -223,16 +223,20 @@ def main():
                     status = Fore.WHITE + "[ ]"
                 print(f"{i}. {status} {j_nome} ({format_bytes(tam)})")
             
-            print(Fore.CYAN + "[0] Confirmar e Prosseguir")
+            print(Fore.CYAN + "[0] Confirmar e Prosseguir (Padrão: pressione ENTER)")
             
+            opc_str = input("\nOpção: ").strip()
+            
+            # Se apertar só ENTER, assume como 0 e avança
+            if opc_str == "" or opc_str == "0":
+                break
+                
             try:
-                opc = int(input("\nOpção: "))
+                opc = int(opc_str)
             except ValueError:
                 continue
 
-            if opc == 0:
-                break
-            elif 1 <= opc <= len(jogos_no_ssd):
+            if 1 <= opc <= len(jogos_no_ssd):
                 nome_alvo = jogos_no_ssd[opc - 1]
                 if nome_alvo in jogos_para_engavetar:
                     jogos_para_engavetar.remove(nome_alvo)
